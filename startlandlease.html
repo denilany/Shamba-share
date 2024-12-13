@@ -1,0 +1,324 @@
+<html><head><base href="." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>Create Your Leasing - Shamba Share</title>
+<style>
+.progress-bar {
+  transition: width 0.5s ease-in-out;
+}
+.form-section {
+  display: none;
+}
+.form-section.active {
+  display: block;
+}
+.step-indicator {
+  transition: all 0.3s ease;
+}
+.step-indicator.active {
+  background-color: #16a34a;
+  color: white;
+}
+.step-indicator.completed {
+  background-color: #22c55e;
+  color: white;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+
+<!-- Navigation -->
+<nav class="bg-green-600 text-white shadow-lg">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center">
+      <svg class="h-8 w-8 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 22V12H16V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="font-bold text-xl">Shamba Share</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-8">
+      <a href="https://example.com/find-land" class="hover:text-green-200">Find Land</a>
+      <a href="https://example.com/list-land" class="hover:text-green-200">Lease Your Land</a>
+      <a href="https://example.com/about" class="hover:text-green-200">About</a>
+      <a href="https://example.com/contact" class="hover:text-green-200">Contact</a>
+      <a href="https://example.com/login" class="bg-white text-green-600 px-4 py-2 rounded-lg hover:bg-green-100">Login</a>
+      <a href="https://example.com/signup" class="bg-green-700 px-4 py-2 rounded-lg hover:bg-green-800">Sign Up</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container mx-auto px-4 py-8">
+  <!-- Progress Tracker -->
+  <div class="mb-8">
+    <div class="flex justify-between items-center mb-4">
+      <div class="flex-1">
+        <div class="flex items-center">
+          <div class="step-indicator active rounded-full h-8 w-8 flex items-center justify-center border-2 border-green-600">1</div>
+          <div class="flex-1 h-1 bg-gray-200">
+            <div class="progress-bar bg-green-600 h-full" style="width: 0%"></div>
+          </div>
+        </div>
+        <span class="text-sm mt-2 block">Property Details</span>
+      </div>
+      <div class="flex-1">
+        <div class="flex items-center">
+          <div class="step-indicator rounded-full h-8 w-8 flex items-center justify-center border-2 border-gray-300">2</div>
+          <div class="flex-1 h-1 bg-gray-200">
+            <div class="progress-bar bg-green-600 h-full" style="width: 0%"></div>
+          </div>
+        </div>
+        <span class="text-sm mt-2 block">Usage & Terms</span>
+      </div>
+      <div class="flex-1">
+        <div class="flex items-center">
+          <div class="step-indicator rounded-full h-8 w-8 flex items-center justify-center border-2 border-gray-300">3</div>
+          <div class="flex-1 h-1 bg-gray-200">
+            <div class="progress-bar bg-green-600 h-full" style="width: 0%"></div>
+          </div>
+        </div>
+        <span class="text-sm mt-2 block">Documentation</span>
+      </div>
+      <div class="flex-1">
+        <div class="flex items-center">
+          <div class="step-indicator rounded-full h-8 w-8 flex items-center justify-center border-2 border-gray-300">4</div>
+        </div>
+        <span class="text-sm mt-2 block">Review & Submit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Sections -->
+  <form id="listing-form" class="bg-white rounded-lg shadow-lg p-8">
+    <!-- Section 1: Property Details -->
+    <div class="form-section active" data-step="1">
+      <h2 class="text-2xl font-bold mb-6">Property Details</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-gray-700 mb-2">Property Name/Title</label>
+          <input type="text" class="w-full px-4 py-2 border rounded-lg" required>
+        </div>
+        
+        <div>
+          <label class="block text-gray-700 mb-2">Total Acreage</label>
+          <input type="number" class="w-full px-4 py-2 border rounded-lg" required>
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block text-gray-700 mb-2">Property Address</label>
+          <input type="text" class="w-full px-4 py-2 border rounded-lg" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 mb-2">City</label>
+          <input type="text" class="w-full px-4 py-2 border rounded-lg" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 mb-2">State</label>
+          <select class="w-full px-4 py-2 border rounded-lg" required>
+            <option value="">Select Location</option>
+            <option>Mamboleo</option>
+            <option>Guba</option>
+            <option>Nyahera</option>
+            <option>Riat</option>
+            <option>Nyamasaria</option>
+            <option>Muhoroni</option>
+            <option>Awasi</option>
+            <option>Ahero</option>
+            <option>Chiga</option>
+          </select>
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block text-gray-700 mb-2">Property Description</label>
+          <textarea class="w-full px-4 py-2 border rounded-lg" rows="4" required></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Usage & Terms -->
+    <div class="form-section" data-step="2">
+      <h2 class="text-2xl font-bold mb-6">Usage & Terms</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-gray-700 mb-2">Permitted Uses</label>
+          <select multiple class="w-full px-4 py-2 border rounded-lg" required>
+            <option>Crop Farming</option>
+            <option>Livestock Grazing</option>
+            <option>Orchard</option>
+            <option>Vineyard</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 mb-2">Lease Duration</label>
+          <select class="w-full px-4 py-2 border rounded-lg" required>
+            <option value="">Select Duration</option>
+            <option>6 months</option>
+            <option>1 year</option>
+            <option>2 years</option>
+            <option>3+ years</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 mb-2">Monthly Lease Rate</label>
+          <input type="number" class="w-full px-4 py-2 border rounded-lg" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 mb-2">Security Deposit</label>
+          <input type="number" class="w-full px-4 py-2 border rounded-lg" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Documentation -->
+    <div class="form-section" data-step="3">
+      <h2 class="text-2xl font-bold mb-6">Documentation</h2>
+      
+      <div class="space-y-6">
+        <div>
+          <label class="block text-gray-700 mb-2">Property Photos</label>
+          <input type="file" multiple class="w-full px-4 py-2 border rounded-lg" accept="image/*" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 mb-2">Proof of Ownership</label>
+          <input type="file" class="w-full px-4 py-2 border rounded-lg" accept=".pdf,.doc,.docx" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 mb-2">Property Survey/Map</label>
+          <input type="file" class="w-full px-4 py-2 border rounded-lg" accept=".pdf,.jpg,.png" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Review -->
+    <div class="form-section" data-step="4">
+      <h2 class="text-2xl font-bold mb-6">Review Your Leasing</h2>
+      <div id="listing-review" class="space-y-6">
+        <!-- Will be populated with JavaScript -->
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-between mt-8">
+      <button type="button" id="prev-btn" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600" style="display: none;">Previous</button>
+      <button type="button" id="next-btn" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">Next</button>
+      <button type="submit" id="submit-btn" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700" style="display: none;">Submit Leasing</button>
+    </div>
+  </form>
+</div>
+
+<script>
+$(document).ready(function() {
+  let currentStep = 1;
+  const totalSteps = 4;
+
+  function updateProgress() {
+    $(`[data-step="${currentStep}"]`).prevAll('.form-section').removeClass('active');
+    $(`[data-step="${currentStep}"]`).nextAll('.form-section').removeClass('active');
+    
+    $(`.form-section[data-step="${currentStep}"]`).addClass('active');
+    
+    $('.step-indicator').each(function(index) {
+      const stepNum = index + 1;
+      
+      if (stepNum < currentStep) {
+        $(this).addClass('completed').removeClass('active');
+        if ($(this).next('.flex-1').length) {
+          $(this).next('.flex-1').find('.progress-bar').css('width', '100%');
+        }
+      } else if (stepNum === currentStep) {
+        $(this).addClass('active').removeClass('completed');
+        if (stepNum > 1) {
+          $(`.step-indicator:nth-of-type(${stepNum-1})`).next('.flex-1').find('.progress-bar').css('width', '100%');
+        }
+      } else {
+        $(this).removeClass('active completed');
+        if ($(this).next('.flex-1').length) {
+          $(this).next('.flex-1').find('.progress-bar').css('width', '0%');
+        }
+      }
+    });
+    
+    $('#prev-btn').toggle(currentStep > 1);
+    $('#next-btn').toggle(currentStep < totalSteps);
+    $('#submit-btn').toggle(currentStep === totalSteps);
+  }
+
+  $('#next-btn').click(function() {
+    if (currentStep < totalSteps) {
+      currentStep++;
+      updateProgress();
+    }
+  });
+
+  $('#prev-btn').click(function() {
+    if (currentStep > 1) {
+      currentStep--;
+      updateProgress();
+    }
+  });
+
+  $('#listing-form').submit(function(e) {
+    e.preventDefault();
+    alert('Form submitted successfully!');
+  });
+});
+</script>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-8 mt-12">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="https://example.com/about" class="text-gray-400 hover:text-white">About Us</a></li>
+          <li><a href="https://example.com/how-it-works" class="text-gray-400 hover:text-white">How It Works</a></li>
+          <li><a href="https://example.com/blog" class="text-gray-400 hover:text-white">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Support</h3>
+        <ul class="space-y-2">
+          <li><a href="https://example.com/faq" class="text-gray-400 hover:text-white">FAQ</a></li>
+          <li><a href="https://example.com/contact" class="text-gray-400 hover:text-white">Contact Us</a></li>
+          <li><a href="https://example.com/terms" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Connect</h3>
+        <div class="flex space-x-4">
+          <a href="https://facebook.com" class="text-gray-400 hover:text-white">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/>
+            </svg>
+          </a>
+          <a href="https://twitter.com" class="text-gray-400 hover:text-white">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5 0-4.55 2.04-4.55 4.54 0 .36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3 0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35 0 12.92-6.92 12.92-12.93 0-.2 0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com" class="text-gray-400 hover:text-white">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+      <p class="text-gray-400">&copy; 2024 Shamba Share. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</body></html>

@@ -1,0 +1,145 @@
+<html>
+<head>
+    <base href="." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <title>Find Land - Shamba Share</title>
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .hero-pattern {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        #map { height: 400px; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen">
+        <!-- Navigation -->
+        <nav class="bg-green-600 text-white shadow-lg">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <svg class="h-8 w-8 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 22V12H16V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="font-bold text-xl">Shamba Share</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="https://example.com/find-land" class="hover:text-green-200">Find Land</a>
+                    <a href="https://example.com/lease-land" class="hover:text-green-200">Lease Your Land</a>
+                    <a href="https://example.com/about" class="hover:text-green-200">About</a>
+                    <a href="https://example.com/contact" class="hover:text-green-200">Contact</a>
+                    <a href="https://example.com/login" class="bg-white text-green-600 px-4 py-2 rounded-lg hover:bg-green-100">Login</a>
+                    <a href="https://example.com/signup" class="bg-green-700 px-4 py-2 rounded-lg hover:bg-green-800">Sign Up</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="hero-pattern py-8">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl font-bold text-gray-800 mb-6">Find Available Land</h1>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <input type="text" placeholder="Location" class="p-2 border rounded-lg">
+                    <select class="p-2 border rounded-lg">
+                        <option>Land Size</option>
+                        <option>1-5 acres</option>
+                        <option>5-20 acres</option>
+                        <option>20+ acres</option>
+                    </select>
+                    <select class="p-2 border rounded-lg">
+                        <option>Price Range</option>
+                        <option>$0-500/month</option>
+                        <option>$501-1000/month</option>
+                        <option>$1000+/month</option>
+                    </select>
+                    <button class="bg-green-600 text-white p-2 rounded-lg hover:bg-green-700">Search</button>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow mb-8">
+                    <h3 class="font-semibold mb-4">Advanced Filters</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <label class="flex items-center"><input type="checkbox" class="mr-2">Water Access</label>
+                        <label class="flex items-center"><input type="checkbox" class="mr-2">Organic Certified</label>
+                        <label class="flex items-center"><input type="checkbox" class="mr-2">Equipment Available</label>
+                        <label class="flex items-center"><input type="checkbox" class="mr-2">Storage Facilities</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mx-auto px-6 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="md:col-span-2">
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-semibold mb-2">20 Acre Farmland</h3>
+                                        <p class="text-gray-600 mb-2">Springfield, IL</p>
+                                    </div>
+                                    <span class="text-green-600 font-semibold">$800/month</span>
+                                </div>
+                                <div class="flex gap-4 mb-4">
+                                    <span class="text-sm text-gray-600">20 acres</span>
+                                    <span class="text-sm text-gray-600">• Water Access</span>
+                                    <span class="text-sm text-gray-600">• Equipment Available</span>
+                                </div>
+                                <p class="text-gray-700 mb-4">Rich soil perfect for organic farming. Includes irrigation system and storage facility. Easy road access.</p>
+                                <div class="flex justify-between items-center">
+                                    <button class="text-green-600 hover:text-green-700">View Details</button>
+                                    <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Contact Owner</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-1">
+                    <div id="map" class="rounded-lg shadow-md"></div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <p class="text-gray-400">&copy; 2024 Shamba Share. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        // Leaflet Map Initialization
+        const map = L.map('map').setView([39.8283, -98.5795], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        L.marker([39.8283, -98.5795]).bindPopup('20 Acre Farmland<br>Springfield, IL').addTo(map);
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = () => {
+            const menu = document.querySelector('.mobile-menu');
+            menu.classList.toggle('hidden');
+        };
+    </script>
+</body>
+</html>
