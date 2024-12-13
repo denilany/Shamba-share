@@ -1,4 +1,5 @@
-<html><head><base href="." /><script src="https://cdn.tailwindcss.com"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><title>Shamba Share - Connect Landowners with Farmers</title><style>@keyframes float {0% {transform: translateY(0px);}50% {transform: translateY(-20px);}100% {transform: translateY(0px);}}
+<html><head>
+    <script src="https://cdn.tailwindcss.com"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><title>Shamba Share - Connect Landowners with Farmers</title><style>@keyframes float {0% {transform: translateY(0px);}50% {transform: translateY(-20px);}100% {transform: translateY(0px);}}
 .floating { animation: float 6s ease-in-out infinite; }
 .hero-pattern {background-color: #ffffff;background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}</style></head><body class="bg-gray-50"><div class="min-h-screen">
 <!-- Navbar -->
@@ -16,8 +17,8 @@
             <a href="https://example.com/list-land" class="hover:text-green-200">List Your Land</a>
             <a href="https://example.com/about" class="hover:text-green-200">About</a>
             <a href="https://example.com/contact" class="hover:text-green-200">Contact</a>
-            <a href="https://example.com/login" class="bg-white text-green-600 px-4 py-2 rounded-lg hover:bg-green-100">Login</a>
-            <a href="https://example.com/signup" class="bg-green-700 px-4 py-2 rounded-lg hover:bg-green-800">Sign Up</a>
+            <a href="/login" class="bg-white text-green-600 px-4 py-2 rounded-lg hover:bg-green-100">Login</a>
+            <a href="/signup" class="bg-green-700 px-4 py-2 rounded-lg hover:bg-green-800">Sign Up</a>
         </div>
     </div>
 </nav>
@@ -45,7 +46,7 @@
                 <!-- </svg> -->
             <!-- </div> -->
             <div class="md:w-1/2 floating">
-                <img class="w-full" src="maize.jpg" alt="Farm Illustration" style="object-fit: cover; width: 100%; height: auto;">
+                <img class="w-full" src="/frontend/templates/maize.jpg" alt="Farm Illustration" style="object-fit: cover; width: 100%; height: auto;">
             </div>            
         </div>
     </div>
