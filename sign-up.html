@@ -1,0 +1,153 @@
+<html><head><base href="." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>Sign Up - Shamba Share</title>
+<style>
+.form-input:focus {
+  border-color: #059669;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+.progress-bar {
+  transition: width 0.5s ease-in-out;
+}
+.section-highlight:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+
+<!-- Navigation -->
+<nav class="bg-green-600 text-white shadow-lg">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center">
+      <svg class="h-8 w-8 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 22V12H16V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <a href="https://example.com" class="font-bold text-xl">Shamba Share</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-2xl mx-auto">
+    <div class="bg-white rounded-lg shadow-lg p-8">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Create Your Account</h1>
+        <p class="text-gray-600 mt-2">Join Shamba Share to start connecting with landowners and farmers</p>
+      </div>
+
+      <form class="space-y-6">
+        <!-- Account Type Selection -->
+        <div class="mb-6">
+          <label class="block text-gray-700 font-semibold mb-3">I am a:</label>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="border rounded-lg p-4 cursor-pointer hover:border-green-500 transition-colors">
+              <input type="radio" name="account-type" id="landowner" class="hidden" checked>
+              <label for="landowner" class="flex items-center cursor-pointer">
+                <svg class="w-6 h-6 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                <span class="font-medium">Landowner</span>
+              </label>
+            </div>
+            <div class="border rounded-lg p-4 cursor-pointer hover:border-green-500 transition-colors">
+              <input type="radio" name="account-type" id="farmer" class="hidden">
+              <label for="farmer" class="flex items-center cursor-pointer">
+                <svg class="w-6 h-6 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                </svg>
+                <span class="font-medium">Farmer</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-gray-700 font-medium mb-2" for="first-name">First Name</label>
+            <input type="text" id="first-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+          </div>
+          <div>
+            <label class="block text-gray-700 font-medium mb-2" for="last-name">Last Name</label>
+            <input type="text" id="last-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="email">Email Address</label>
+          <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="phone">Phone Number</label>
+          <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="password">Password</label>
+          <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+          <p class="text-sm text-gray-500 mt-1">Must be at least 8 characters long and include numbers and symbols</p>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+        </div>
+
+        <div class="flex items-start">
+          <input type="checkbox" id="terms" class="mt-1" required>
+          <label for="terms" class="ml-2 text-gray-600">I agree to the <a href="https://example.com/terms" class="text-green-600 hover:underline">Terms of Service</a> and <a href="https://example.com/privacy" class="text-green-600 hover:underline">Privacy Policy</a></label>
+        </div>
+
+        <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors font-medium">Create Account</button>
+      </form>
+
+      <div class="text-center mt-6">
+        <p class="text-gray-600">Already have an account? <a href="https://example.com/login" class="text-green-600 hover:underline">Log in</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-8 mt-12">
+  <div class="container mx-auto px-6">
+    <div class="text-center">
+      <p class="text-gray-400">&copy; 2024 Shamba Share. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Add password strength validation
+document.getElementById('password').addEventListener('input', function(e) {
+  const password = e.target.value;
+  const hasNumber = /\d/.test(password);
+  const hasSymbol = /[!@#$%^&*]/.test(password);
+  const hasLength = password.length >= 8;
+  
+  if(hasNumber && hasSymbol && hasLength) {
+    e.target.style.borderColor = '#059669';
+  } else {
+    e.target.style.borderColor = '#ef4444';
+  }
+});
+
+// Add password match validation
+document.getElementById('confirm-password').addEventListener('input', function(e) {
+  const password = document.getElementById('password').value;
+  const confirmPassword = e.target.value;
+  
+  if(password === confirmPassword) {
+    e.target.style.borderColor = '#059669';
+  } else {
+    e.target.style.borderColor = '#ef4444';
+  }
+});
+</script>
+
+</body></html>
