@@ -38,7 +38,7 @@
         <div id="userDropdownMenu" class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-20 border border-gray-200">
           <ul class="py-1">
             <li>
-              <a href="/logout" class="block px-4 py-2 text-green-600 hover:bg-gray-100 transition">
+              <a href="/login" class="block px-4 py-2 text-green-600 hover:bg-gray-100 transition">
                 Logout
               </a>
             </li>
@@ -173,9 +173,10 @@
     </div>
   </div>
   <div class="flex justify-center space-x-4" style="margin-top: 50px;">
-    <button onclick="switchDashboard('landowner')"  id="landownerBtn" class="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
-        Lease
-    </button>
+    <button onclick="window.location.href='startlandlease.html'" id="landownerBtn" class="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
+      <!-- View land -->
+      <a href="/startlandlease" class="hover:text-green-200">Lease</a>
+    </button>  
 </div>
 </div>
 
@@ -290,9 +291,10 @@
     </div>
   </div>
   <div class="flex justify-center space-x-4" style="margin-top: 50px;">
-    <button onclick="switchDashboard('landowner')" id="landownerBtn" class="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
-        View land
-    </button>
+    <button onclick="window.location.href='findland.html'" id="landownerBtn" class="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
+      <!-- View land -->
+      <a href="/findland" class="hover:text-green-200">View Land</a>
+    </button>  
 </div>
 
 </div>
