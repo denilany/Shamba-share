@@ -2,7 +2,6 @@ package database
 
 import (
 	"database/sql"
-	"log"
 	"os"
 	"path/filepath"
 
@@ -25,7 +24,6 @@ func InitDB() (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	log.Printf("Database path: %s", absPath)
 
 	// Ensure the directory exists
 	dbDir := filepath.Dir(absPath)
