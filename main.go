@@ -151,7 +151,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		// Successful login
 		// TODO: Implement proper session management
 		Uname := ""
-		nameErr := db.QueryRow("SELECT first_name FROM users WHERE email = ?", email).Scan(&Uname)
+		nameErr := db.QueryRow("SELECT name FROM users WHERE email = ?", email).Scan(&Uname)
 		if nameErr != nil {
 			http.Error(w, "Database error", http.StatusInternalServerError)
 			log.Println("Username query error:", err)
@@ -174,20 +174,13 @@ func findLandHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func dashboardHandler(w http.ResponseWriter, r *http.Request) {
-	// var letter, uName string
-	data := struct {
-		letter, uName string
-	}{
-
-		letter: CurrentUser.Letter,
-		uName:  CurrentUser.FullName,
-	}
+	
 	if r.URL.Path != "/dashboard" {
 		http.NotFound(w, r)
 		return
 	}
 
-	renderTemplate(w, "dashboard.html", data)
+	renderTemplate(w, "dashboard.html", CurrentUser)
 }
 
 func leaselandHandler(w http.ResponseWriter, r *http.Request) {
