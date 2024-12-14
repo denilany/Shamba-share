@@ -1,0 +1,19 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      # Persistent volume for SQLite database
+      - sqlite-data:/data
+    ports:
+      # Map container port to host port
+      - "8080:8080"
+
+volumes:
+  # Named volume for persistent SQLite data
+  sqlite-data:
+    driver: local
