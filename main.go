@@ -260,8 +260,8 @@ func main() {
 	}
 
 	// Serve static files
-	fs := http.FileServer(http.Dir("static"))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	fs := http.FileServer(http.Dir("frontend/templates"))
+	http.Handle("/frontend/templates/", http.StripPrefix("/frontend/templates/", fs))
 
 	// Other handlers remain the same
 	http.HandleFunc("/", homeHandler)
