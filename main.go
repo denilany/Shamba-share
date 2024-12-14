@@ -1,9 +1,7 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 	"os"
@@ -14,13 +12,6 @@ import (
 )
 
 var db *sql.DB
-
-type UserName struct {
-	Letter   string
-	FullName string
-}
-
-var CurrentUser UserName
 
 // renderTemplate is a helper function to render HTML templates
 func renderTemplate(w http.ResponseWriter, tmpl string, data interface{}) {
@@ -174,7 +165,6 @@ func findLandHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func dashboardHandler(w http.ResponseWriter, r *http.Request) {
-	
 	if r.URL.Path != "/dashboard" {
 		http.NotFound(w, r)
 		return
@@ -210,47 +200,12 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	// Set up logging to a file
-	logFile, err := os.OpenFile("app.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	// Initialize database
+	db, err := database.InitDB()
 	if err != nil {
-		log.Fatal("Failed to open log file:", err)
-	}
-	defer logFile.Close()
-	log.SetOutput(logFile)
-
-	// Determine the absolute path for the database
-	dbPath, err := filepath.Abs("./users.db")
-	if err != nil {
-		log.Fatal("Failed to get absolute path:", err)
-	}
-	log.Printf("Database path: %s", dbPath)
-
-	// Open the database with additional parameters
-	db, err = sql.Open("sqlite3", dbPath+"?_journal_mode=WAL&_foreign_keys=on")
-	if err != nil {
-		log.Fatal("Failed to open database:", err)
+		log.Fatal("Failed to initialize database:", err)
 	}
 	defer db.Close()
-
-	// Verify database connection
-	err = db.Ping()
-	if err != nil {
-		log.Fatal("Failed to connect to database:", err)
-	}
-
-	// Create the users table if it doesn't exist
-	_, err = db.Exec(`
-		CREATE TABLE IF NOT EXISTS users (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			name TEXT NOT NULL,
-			email TEXT NOT NULL UNIQUE,
-			phone TEXT NOT NULL,
-			password TEXT NOT NULL
-		)
-	`)
-	if err != nil {
-		log.Fatal("Failed to create table:", err)
-	}
 
 	// Serve static files
 	fs := http.FileServer(http.Dir("frontend/templates"))
@@ -262,9 +217,6 @@ func main() {
 	http.HandleFunc("/login", loginHandler)
 	http.HandleFunc("/findland", findLandHandler)
 	http.HandleFunc("/dashboard", dashboardHandler)
-	http.HandleFunc("/leaseland", leaselandHandler)
-	http.HandleFunc("/about", aboutHandler)
-	http.HandleFunc("/contact", contactHandler)
 
 	// Start the server
 	port := 8080
