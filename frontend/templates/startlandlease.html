@@ -218,7 +218,7 @@
 
 <script>
 $(document).ready(function() {
-  let currentStep = 1;
+  let currentStep = 0;
   const totalSteps = 4;
 
   function updateProgress() {
@@ -230,7 +230,7 @@ $(document).ready(function() {
     $('.step-indicator').each(function(index) {
       const stepNum = index + 1;
       
-      if (stepNum < currentStep) {
+      if (stepNum <= currentStep) {
         $(this).addClass('completed').removeClass('active');
         if ($(this).next('.flex-1').length) {
           $(this).next('.flex-1').find('.progress-bar').css('width', '100%');
