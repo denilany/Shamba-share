@@ -165,6 +165,32 @@ func dashboardHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "dashboard.html", nil)
 }
 
+func leaselandHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/leaseland" {
+		http.NotFound(w, r)
+		return
+	}
+
+	renderTemplate(w, "leaseland.html", nil)
+}
+
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/about" {
+		http.NotFound(w, r)
+		return
+	}
+
+	renderTemplate(w, "about.html", nil)
+}
+func contactHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/contact" {
+		http.NotFound(w, r)
+		return
+	}
+
+	renderTemplate(w, "contact.html", nil)
+}
+
 func main() {
 	// Set up logging to a file
 	logFile, err := os.OpenFile("app.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
@@ -218,6 +244,9 @@ func main() {
 	http.HandleFunc("/login", loginHandler)
 	http.HandleFunc("/findland", findLandHandler)
 	http.HandleFunc("/dashboard", dashboardHandler)
+	http.HandleFunc("/leaseland", leaselandHandler)
+	http.HandleFunc("/about", aboutHandler)
+	http.HandleFunc("/contact", contactHandler)
 
 	// Start the server
 	port := 8080
