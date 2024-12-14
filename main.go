@@ -15,6 +15,13 @@ import (
 
 var db *sql.DB
 
+type UserName struct {
+	Letter   string
+	FullName string
+}
+
+var CurrentUser UserName
+
 // renderTemplate is a helper function to render HTML templates
 func renderTemplate(w http.ResponseWriter, tmpl string, data interface{}) {
 	t, err := template.ParseFiles(filepath.Join("frontend/templates", tmpl))
@@ -143,6 +150,16 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 		// Successful login
 		// TODO: Implement proper session management
+		Uname := ""
+		nameErr := db.QueryRow("SELECT first_name FROM users WHERE email = ?", email).Scan(&Uname)
+		if nameErr != nil {
+			http.Error(w, "Database error", http.StatusInternalServerError)
+			log.Println("Username query error:", err)
+			return
+		}
+		CurrentUser.FullName = Uname
+		CurrentUser.Letter = string(Uname[0])
+
 		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
 	}
 }
@@ -157,12 +174,20 @@ func findLandHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func dashboardHandler(w http.ResponseWriter, r *http.Request) {
+	// var letter, uName string
+	data := struct {
+		letter, uName string
+	}{
+
+		letter: CurrentUser.Letter,
+		uName:  CurrentUser.FullName,
+	}
 	if r.URL.Path != "/dashboard" {
 		http.NotFound(w, r)
 		return
 	}
 
-	renderTemplate(w, "dashboard.html", nil)
+	renderTemplate(w, "dashboard.html", data)
 }
 
 func leaselandHandler(w http.ResponseWriter, r *http.Request) {
