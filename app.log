@@ -46,3 +46,7 @@
 2024/12/14 05:09:09 Server starting on port 8080
 2024/12/14 05:33:11 Database path: /home/denil/Shamba-share/users.db
 2024/12/14 05:33:12 Server starting on port 8080
+2024/12/14 06:54:45 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 06:54:45 Server starting on port 8080
+2024/12/14 06:55:49 Signup attempt for email: barotieno@gmail.com, name: Barack, phone: 0987654329
+2024/12/14 06:55:49 User inserted successfully. Rows affected: 1

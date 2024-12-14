@@ -162,7 +162,7 @@ func dashboardHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	renderTemplate(w, "startlandlease.html", nil)
+	renderTemplate(w, "dashboard.html", nil)
 }
 
 func main() {
