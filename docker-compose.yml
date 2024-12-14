@@ -9,11 +9,15 @@ services:
     volumes:
       # Persistent volume for SQLite database
       - sqlite-data:/data
+    environment:
+      # Set the database path to the mounted volume
+      - DATABASE_PATH=/data/users.db
     ports:
-      # Map container port to host port
+      # Map container port to host port (adjust as needed)
       - "8080:8080"
 
 volumes:
   # Named volume for persistent SQLite data
   sqlite-data:
     driver: local
+    

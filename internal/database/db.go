@@ -2,6 +2,8 @@ package database
 
 import (
 	"database/sql"
+	"log"
+	"os"
 	"path/filepath"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -11,12 +13,27 @@ var DB *sql.DB
 
 // InitDB sets up and returns a database connection
 func InitDB() (*sql.DB, error) {
-	dbPath, err := filepath.Abs("./users.db")
+	// Check for DATABASE_PATH environment variable
+	dbPath := os.Getenv("DATABASE_PATH")
+	if dbPath == "" {
+		// Fallback to default path if not set
+		dbPath = "./users.db"
+	}
+
+	// Ensure absolute path
+	absPath, err := filepath.Abs(dbPath)
 	if err != nil {
 		return nil, err
 	}
+	log.Printf("Database path: %s", absPath)
 
-	db, err := sql.Open("sqlite3", dbPath)
+	// Ensure the directory exists
+	dbDir := filepath.Dir(absPath)
+	if err := os.MkdirAll(dbDir, 0755); err != nil {
+		return nil, err
+	}
+
+	db, err := sql.Open("sqlite3", absPath)
 	if err != nil {
 		return nil, err
 	}

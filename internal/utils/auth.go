@@ -11,7 +11,6 @@ import (
 	"shambashare/internal/templates"
 )
 
-
 // SignupHandler handles user signup
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
@@ -107,11 +106,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 		// Successful login
 		// TODO: Implement proper session management
-		Uname, err := database.GetUserNamByEmail(email)
-
-		CurrentUser.FullName = Uname
-		CurrentUser.Logo = string(Uname[0])
-		
 		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
 	}
 }

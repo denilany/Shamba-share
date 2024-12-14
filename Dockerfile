@@ -23,8 +23,4 @@ COPY --from=builder /app/main .
 
 RUN mkdir -p /data
 
-ENV DATABASE_PATH=/data/app.db
-
-EXPOSE 8080
-
 CMD ["./main"]
