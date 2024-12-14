@@ -106,6 +106,16 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 		// Successful login
 		// TODO: Implement proper session management
+
+		name, err := database.GetUserNamByEmail(email)
+		if err != nil {
+			http.Error(w, "Database error", http.StatusInternalServerError)
+			log.Println("Username query error:", err)
+			return
+		}
+		CurrentUser.FullName = name
+		CurrentUser.Logo = string(name[0])
+
 		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
 	}
 }
