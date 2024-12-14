@@ -27,6 +27,9 @@ func main() {
 	http.HandleFunc("/login", utils.LoginHandler)
 	http.HandleFunc("/findland", utils.FindLandHandler)
 	http.HandleFunc("/dashboard", utils.DashboardHandler)
+	http.HandleFunc("/landlease", utils.LandLeaseHandler)
+	http.HandleFunc("/about", utils.AboutHandler)
+	http.HandleFunc("/contact", utils.ContactHandler)
 
 	// Start the server
 	port := 8080

@@ -8,7 +8,7 @@ import (
 
 type UserName struct {
 	FullName string
-	Logo string
+	Logo     string
 }
 
 var CurrentUser UserName
@@ -41,4 +41,31 @@ func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	templates.RenderTemplate(w, "dashboard.html", CurrentUser)
+}
+
+func LandLeaseHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/landlease" {
+		http.NotFound(w, r)
+		return
+	}
+
+	templates.RenderTemplate(w, "leaseland.html", nil)
+}
+
+func AboutHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path!= "/about" {
+        http.NotFound(w, r)
+        return
+    }
+
+    templates.RenderTemplate(w, "about.html", nil)
+}
+
+func ContactHandler(w http.ResponseWriter, r *http.Request){
+	if r.URL.Path!= "/contact" {
+        http.NotFound(w, r)
+        return
+    }
+
+    templates.RenderTemplate(w, "contact.html", nil)
 }
