@@ -4,10 +4,164 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
 
-	"shambashare/internal/database"
-	"shambashare/internal/utils"
+	_ "github.com/mattn/go-sqlite3"
+	"golang.org/x/crypto/bcrypt"
 )
+
+var db *sql.DB
+
+// renderTemplate is a helper function to render HTML templates
+func renderTemplate(w http.ResponseWriter, tmpl string, data interface{}) {
+	t, err := template.ParseFiles(filepath.Join("frontend/templates", tmpl))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	err = t.Execute(w, data)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+// homeHandler handles the home page route
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
+
+	renderTemplate(w, "index.html", nil)
+}
+
+// signupHandler handles user signup
+func signupHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		renderTemplate(w, "signup.html", nil)
+		return
+	}
+
+	if r.Method == http.MethodPost {
+		// Collect all form values
+		name := r.FormValue("first-name")
+		email := r.FormValue("email")
+		phone := r.FormValue("phone")
+		password := r.FormValue("password")
+
+		fmt.Printf("Signup attempt for email: %s, name: %s, phone: %s", email, name, phone)
+
+		// Validate input
+		if name == "" || email == "" || phone == "" || password == "" {
+			http.Error(w, "All fields are required", http.StatusBadRequest)
+			return
+		}
+
+		// Log the attempt
+		log.Printf("Signup attempt for email: %s, name: %s, phone: %s", email, name, phone)
+
+		// Check if user already exists
+		var count int
+		err := db.QueryRow("SELECT COUNT(*) FROM users WHERE email = ?", email).Scan(&count)
+		if err != nil {
+			http.Error(w, "Database check error: "+err.Error(), http.StatusInternalServerError)
+			log.Printf("Database check error: %v", err)
+			return
+		}
+		if count > 0 {
+			http.Error(w, "User with this email already exists", http.StatusConflict)
+			return
+		}
+
+		// Hash the password
+		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+		if err != nil {
+			http.Error(w, "Error hashing password", http.StatusInternalServerError)
+			log.Printf("Password hash error: %v", err)
+			return
+		}
+
+		// Insert user into the database
+		result, err := db.Exec(
+			"INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)",
+			name, email, phone, hashedPassword,
+		)
+		if err != nil {
+			http.Error(w, "Error saving user to the database: "+err.Error(), http.StatusInternalServerError)
+			log.Printf("Signup database insert error: %v", err)
+			return
+		}
+
+		// Log the result of the insertion
+		rowsAffected, _ := result.RowsAffected()
+		log.Printf("User inserted successfully. Rows affected: %d", rowsAffected)
+
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+	}
+}
+
+// loginHandler handles user login
+func loginHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		renderTemplate(w, "login.html", nil)
+		return
+	}
+
+	if r.Method == http.MethodPost {
+		email := r.FormValue("email")
+		password := r.FormValue("password")
+
+		// Validate input
+		if email == "" || password == "" {
+			http.Error(w, "All fields are required", http.StatusBadRequest)
+			return
+		}
+
+		// Check if user exists
+		var hashedPassword string
+		err := db.QueryRow("SELECT password FROM users WHERE email = ?", email).Scan(&hashedPassword)
+		if err == sql.ErrNoRows {
+			http.Error(w, "Invalid email or password", http.StatusUnauthorized)
+			return
+		}
+		if err != nil {
+			http.Error(w, "Database error", http.StatusInternalServerError)
+			log.Println("Login query error:", err)
+			return
+		}
+
+		// Compare passwords
+		err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+		if err != nil {
+			http.Error(w, "Invalid email or password", http.StatusUnauthorized)
+			return
+		}
+
+		// Successful login
+		// TODO: Implement proper session management
+		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
+	}
+}
+
+func findLandHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/findland" {
+		http.NotFound(w, r)
+		return
+	}
+
+	renderTemplate(w, "findland.html", nil)
+}
+
+func dashboardHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/dashboard" {
+		http.NotFound(w, r)
+		return
+	}
+
+	renderTemplate(w, "dashboard.html", nil)
+}
 
 func main() {
 	// Initialize database
@@ -21,12 +175,12 @@ func main() {
 	fs := http.FileServer(http.Dir("frontend/templates"))
 	http.Handle("/frontend/templates/", http.StripPrefix("/frontend/templates/", fs))
 
-	// Set up routes
-	http.HandleFunc("/", utils.HomeHandler)
-	http.HandleFunc("/signup", utils.SignupHandler)
-	http.HandleFunc("/login", utils.LoginHandler)
-	http.HandleFunc("/findland", utils.FindLandHandler)
-	http.HandleFunc("/dashboard", utils.DashboardHandler)
+	// Other handlers remain the same
+	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/signup", signupHandler)
+	http.HandleFunc("/login", loginHandler)
+	http.HandleFunc("/findland", findLandHandler)
+	http.HandleFunc("/dashboard", dashboardHandler)
 
 	// Start the server
 	port := 8080
