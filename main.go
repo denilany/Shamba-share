@@ -30,7 +30,6 @@ func main() {
 
 	// Start the server
 	port := 8080
-	fmt.Printf("Server starting on port %d...\n", port)
-	log.Printf("Server starting on port %d", port)
+	log.Printf("Server running on port %d", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf("localhost:%d", port), nil))
 }
