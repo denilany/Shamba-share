@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"shambashare/internal/database"
 	"shambashare/internal/utils"
@@ -31,8 +32,11 @@ func main() {
 	http.HandleFunc("/about", utils.AboutHandler)
 	http.HandleFunc("/contact", utils.ContactHandler)
 
-	// Start the server
-	port := 8080
+	// Get port from environment variable or use default
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Default port if not specified
+	}
 	log.Printf("Server running on port %d", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf("localhost:%d", port), nil))
 }
