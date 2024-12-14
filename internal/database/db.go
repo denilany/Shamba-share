@@ -68,3 +68,10 @@ func GetUserPasswordByEmail(email string) (string, error) {
 	err := DB.QueryRow("SELECT password FROM users WHERE email = ?", email).Scan(&hashedPassword)
 	return hashedPassword, err
 }
+
+// GetUserPasswordByEmail retrieves the hashed password for a given email
+func GetUserNamByEmail(email string) (string, error) {
+	var userName string
+	err := DB.QueryRow("SELECT name FROM users WHERE email = ?", email).Scan(&userName)
+	return userName, err
+}
