@@ -6,6 +6,13 @@ import (
 	"shambashare/internal/templates"
 )
 
+type UserName struct {
+	FullName string
+	Logo string
+}
+
+var CurrentUser UserName
+
 // HomeHandler handles the home page route
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
@@ -33,5 +40,5 @@ func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	templates.RenderTemplate(w, "dashboard.html", nil)
+	templates.RenderTemplate(w, "dashboard.html", CurrentUser)
 }
