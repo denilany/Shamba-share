@@ -1,6 +1,14 @@
 <html><head><base href="." />
 <script src="https://cdn.tailwindcss.com"></script>
 <title>Dashboard - Shamba Share</title>
+<style>
+  .dropdown-menu {
+    display: none;
+  }
+  .dropdown-menu.show {
+    display: block;
+  }
+</style>
 </head>
 <body class="bg-gray-50">
 <nav class="bg-green-600 text-white shadow-lg">
@@ -21,12 +29,21 @@
         </button>
       </div>
       <div class="relative group">
-        <button class="flex items-center space-x-2 hover:text-green-200">
+        <button id="userDropdownBtn" class="flex items-center space-x-2 hover:text-green-200 relative">
           <div class="w-8 h-8 rounded-full bg-green-700 flex items-center justify-center">
             <span class="text-sm font-semibold">{{ .Logo }}</span>
           </div>
           <span>{{ .FullName }}</span>
         </button>
+        <div id="userDropdownMenu" class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-20 border border-gray-200">
+          <ul class="py-1">
+            <li>
+              <a href="/logout" class="block px-4 py-2 text-green-600 hover:bg-gray-100 transition">
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -288,6 +305,29 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const userDropdownBtn = document.getElementById('userDropdownBtn');
+      const userDropdownMenu = document.getElementById('userDropdownMenu');
+    
+      // Toggle dropdown
+      userDropdownBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        userDropdownMenu.classList.toggle('show');
+      });
+    
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function() {
+        userDropdownMenu.classList.remove('show');
+      });
+    
+      // Prevent dropdown from closing when clicking inside
+      userDropdownMenu.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    });
+    </script>
 
 <script>
 function switchDashboard(type) {
