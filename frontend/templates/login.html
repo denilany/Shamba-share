@@ -39,15 +39,15 @@
         <p class="text-gray-600 mt-2">Sign in to your Shamba Share account</p>
       </div>
 
-      <form class="space-y-6">
+      <form class="space-y-6" method="POST" action="/login">
         <div>
           <label class="block text-gray-700 font-medium mb-2" for="email">Email Address</label>
-          <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+          <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
         </div>
 
         <div>
           <label class="block text-gray-700 font-medium mb-2" for="password">Password</label>
-          <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+          <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
           <div class="flex justify-end mt-1">
             <a href="/forgot-password" class="text-sm text-green-600 hover:underline">Forgot password?</a>
           </div>
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const passwordInput = document.getElementById('password');
 
   form.addEventListener('submit', function(e) {
-    e.preventDefault();
+    // e.preventDefault();
     
     // Basic validation
     if (!emailInput.value || !passwordInput.value) {
@@ -100,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Here you would typically make an API call to authenticate
     console.log('Login attempted with:', {
       email: emailInput.value,
-      password: passwordInput.value,
       remember: document.getElementById('remember').checked
     });
   });

@@ -1,0 +1,48 @@
+2024/12/14 03:25:48 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 03:25:48 Server starting on port 8080
+2024/12/14 03:38:57 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 03:38:57 Server starting on port 8080
+2024/12/14 03:41:03 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 03:41:03 Server starting on port 8080
+2024/12/14 03:45:33 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 03:45:33 Server starting on port 8080
+2024/12/14 03:46:17 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 03:46:17 Server starting on port 8080
+2024/12/14 03:49:08 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 03:49:08 Server starting on port 8080
+2024/12/14 03:49:42 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 03:49:42 Server starting on port 8080
+2024/12/14 03:59:22 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 03:59:22 Server starting on port 8080
+2024/12/14 04:02:30 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:02:30 Server starting on port 8080
+2024/12/14 04:05:43 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:05:43 Server starting on port 8080
+2024/12/14 04:06:13 Signup attempt for email: ant@gmail.com, name: ant, phone: 0987654321
+2024/12/14 04:06:13 Database check error: no such column: email
+2024/12/14 04:15:36 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:15:36 Server starting on port 8080
+2024/12/14 04:17:50 Signup attempt for email: ant@gmail.com, name: ant, phone: 0987654321
+2024/12/14 04:17:50 User inserted successfully. Rows affected: 1
+2024/12/14 04:20:10 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:20:10 Server starting on port 8080
+2024/12/14 04:22:31 Signup attempt for email: denilany1@gmail.com, name: denil, phone: 0987654323
+2024/12/14 04:22:31 User inserted successfully. Rows affected: 1
+2024/12/14 04:26:32 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:26:32 Server starting on port 8080
+2024/12/14 04:29:41 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:29:41 Server starting on port 8080
+2024/12/14 04:36:07 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:36:07 Server starting on port 8080
+2024/12/14 04:41:36 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:41:36 Server starting on port 8080
+2024/12/14 04:45:32 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:45:32 Server starting on port 8080
+2024/12/14 04:46:44 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:46:44 Server starting on port 8080
+2024/12/14 04:51:23 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 04:51:23 Server starting on port 8080
+2024/12/14 05:09:09 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 05:09:09 Server starting on port 8080
+2024/12/14 05:33:11 Database path: /home/denil/Shamba-share/users.db
+2024/12/14 05:33:12 Server starting on port 8080

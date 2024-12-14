@@ -39,7 +39,7 @@
         <p class="text-gray-600 mt-2">Join Shamba Share to start connecting with landowners and farmers</p>
       </div>
 
-      <form class="space-y-6">
+      <form class="space-y-6" method="POST">
         <!-- Account Type Selection -->
         <div class="mb-6">
           <label class="block text-gray-700 font-semibold mb-3">I am a:</label>
@@ -69,27 +69,27 @@
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-gray-700 font-medium mb-2" for="first-name">First Name</label>
-            <input type="text" id="first-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+            <input type="text" id="first-name" name="first-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
           </div>
           <div>
             <label class="block text-gray-700 font-medium mb-2" for="last-name">Last Name</label>
-            <input type="text" id="last-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+            <input type="text" id="last-name" name="last-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
           </div>
         </div>
 
         <div>
           <label class="block text-gray-700 font-medium mb-2" for="email">Email Address</label>
-          <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+          <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
         </div>
 
         <div>
           <label class="block text-gray-700 font-medium mb-2" for="phone">Phone Number</label>
-          <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+          <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
         </div>
 
         <div>
           <label class="block text-gray-700 font-medium mb-2" for="password">Password</label>
-          <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
+          <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none form-input" required>
           <p class="text-sm text-gray-500 mt-1">Must be at least 8 characters long and include numbers and symbols</p>
         </div>
 
