@@ -28,7 +28,9 @@ func main() {
 	http.HandleFunc("/login", utils.LoginHandler)
 	http.HandleFunc("/findland", utils.FindLandHandler)
 	http.HandleFunc("/dashboard", utils.DashboardHandler)
-	http.HandleFunc("/landlease", utils.LandLeaseHandler)
+	http.HandleFunc("/leaseland", utils.LandLeaseHandler)
+	http.HandleFunc("/viewlandforlease", utils.ViewLandLeaseHandler)
+	http.HandleFunc("/startleasing", utils.StartLeaseHandler)
 	http.HandleFunc("/about", utils.AboutHandler)
 	http.HandleFunc("/contact", utils.ContactHandler)
 
@@ -37,6 +39,6 @@ func main() {
 	if port == "" {
 		port = "8080" // Default port if not specified
 	}
-	log.Printf("Server running on port: %s", port)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf("localhost:%s", port), nil))
+	log.Printf("Server running on port %s", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }

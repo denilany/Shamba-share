@@ -44,12 +44,30 @@ func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func LandLeaseHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/landlease" {
+	if r.URL.Path != "/leaseland" {
 		http.NotFound(w, r)
 		return
 	}
 
 	templates.RenderTemplate(w, "leaseland.html", nil)
+}
+
+func ViewLandLeaseHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/viewlandforlease" {
+		http.NotFound(w, r)
+		return
+	}
+
+	templates.RenderTemplate(w, "viewlandforlease.html", nil)
+}
+
+func StartLeaseHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/startleasing" {
+		http.NotFound(w, r)
+		return
+	}
+
+	templates.RenderTemplate(w, "startlandlease.html", nil)
 }
 
 func AboutHandler(w http.ResponseWriter, r *http.Request) {
