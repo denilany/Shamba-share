@@ -6,9 +6,10 @@ import (
 	"log"
 	"net/http"
 
-	"golang.org/x/crypto/bcrypt"
 	"shambashare/internal/database"
 	"shambashare/internal/templates"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 // SignupHandler handles user signup

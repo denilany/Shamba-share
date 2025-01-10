@@ -8,6 +8,8 @@ import (
 
 	"shambashare/internal/database"
 	"shambashare/internal/utils"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -18,21 +20,24 @@ func main() {
 	}
 	defer db.Close()
 
+	// Create a new router
+	r := mux.NewRouter()
+
 	// Serve static files
 	fs := http.FileServer(http.Dir("frontend/templates"))
-	http.Handle("/frontend/templates/", http.StripPrefix("/frontend/templates/", fs))
+	r.PathPrefix("/frontend/templates/").Handler(http.StripPrefix("/frontend/templates/", fs))
 
 	// Set up routes
-	http.HandleFunc("/", utils.HomeHandler)
-	http.HandleFunc("/signup", utils.SignupHandler)
-	http.HandleFunc("/login", utils.LoginHandler)
-	http.HandleFunc("/findland", utils.FindLandHandler)
-	http.HandleFunc("/dashboard", utils.DashboardHandler)
-	http.HandleFunc("/leaseland", utils.LandLeaseHandler)
-	http.HandleFunc("/viewlandforlease", utils.ViewLandLeaseHandler)
-	http.HandleFunc("/startleasing", utils.StartLeaseHandler)
-	http.HandleFunc("/about", utils.AboutHandler)
-	http.HandleFunc("/contact", utils.ContactHandler)
+	r.HandleFunc("/", utils.HomeHandler).Methods("GET")
+	r.HandleFunc("/signup", utils.SignupHandler).Methods("GET", "POST")
+	r.HandleFunc("/login", utils.LoginHandler).Methods("GET", "POST")
+	r.HandleFunc("/findland", utils.FindLandHandler).Methods("GET")
+	r.HandleFunc("/dashboard", utils.DashboardHandler).Methods("GET")
+	r.HandleFunc("/leaseland", utils.LandLeaseHandler).Methods("GET", "POST")
+	r.HandleFunc("/viewlandforlease", utils.ViewLandLeaseHandler).Methods("GET")
+	r.HandleFunc("/startleasing", utils.StartLeaseHandler).Methods("POST")
+	r.HandleFunc("/about", utils.AboutHandler).Methods("GET")
+	r.HandleFunc("/contact", utils.ContactHandler).Methods("GET", "POST")
 
 	// Get port from environment variable or use default
 	port := os.Getenv("PORT")
@@ -40,5 +45,5 @@ func main() {
 		port = "8080" // Default port if not specified
 	}
 	log.Printf("Server running on port %s", port)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), r))
 }
